@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import SwiftUICharts
 
 struct StockDetailedView: View {
     
     // MARK: - Variables
-    @EnvironmentObject private var stockObserver: StockObserver
+    @EnvironmentObject private var stockObserver: StockStore
     private var ticker: String {
         if let index = stockObserver.selectedStockIndex {
             return self.stockObserver.stocks[index].companyTicker
@@ -28,14 +27,15 @@ struct StockDetailedView: View {
     }
     
     // MARK: - Body
+    
     var body: some View {
         VStack {
             NavigationBarDetailedView(ticker: ticker, companyName: companyName)
                 .padding([.horizontal, .top], 20)
             
-            TabsMenu()
+            DetailsToggles()
                 .frame(height: 40)
-                .padding(.leading, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                .padding(.leading, 10)
                 
             Divider()
             ChartView()

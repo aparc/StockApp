@@ -11,19 +11,12 @@ struct MainView: View {
     
     // MARK: - Variables
     
-    @EnvironmentObject var stockObserver: StockObserver
-    @State private var searchText: String = ""
+    @EnvironmentObject var stockStore: StockStore
+    @EnvironmentObject var appStore: AppStore
     @State private var showFavourites: Bool = false
     var filteredStocks: [Stock] {
-        if !searchText.isEmpty {
-            let search = searchText.lowercased()
-            return stockObserver.stocks.filter { stock in
-                stock.companyName.lowercased().contains(search) || stock.companyTicker.lowercased().contains(search)
-            }
-        } else {
-            return stockObserver.stocks.filter { stock in
-                (!showFavourites || stock.isFavourite)
-            }
+        return stockStore.stocks.filter { stock in
+            (!showFavourites || stock.isFavourite)
         }
     }
     
@@ -31,45 +24,43 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            if stockObserver.selectedStockIndex != nil {
-                StockDetailedView()
-                    .transition(.opacity)
-            } else {
-                ScrollView(showsIndicators: false) {
-                    LazyVStack (pinnedViews: [.sectionHeaders]) {
-                        SearchInput(text: $searchText)
-                            .padding(.all, 5)
-                        Section(header: listHeader) {
+            ScrollView(showsIndicators: false) {
+                LazyVStack (pinnedViews: [.sectionHeaders]) {
+                    SearchInput()
+                        .padding(.all, 5)
+                    
+                    if appStore.showSearchView {
+                        SearchView()
+                            .transition(.opacity)
+                    } else {
+                        Section(header: FavouriteStocksToggle(favourite: $showFavourites)) {
                             ForEach(filteredStocks.indices, id: \.self) { index in
                                 StockSnippet(stock: filteredStocks[index], backgroundColor: index % 2 == 0 ? Color.init("odd") : Color.white)
                                     .onTapGesture {
                                         withAnimation {
-                                            let ticker = self.filteredStocks[index].companyTicker
-                                            self.stockObserver.selectedStockIndex = self.stockObserver.stocks.firstIndex(where: {$0.companyTicker == ticker})
-                                            self.searchText = ""
+                                            self.onSnippetTap(index)
                                         }
                                     }
                             }
                         }
                     }
                 }
-                .padding()
-            }   
+            }
+            .padding()
+            
+            if stockStore.showDetails {
+                StockDetailedView()
+                    .transition(.asymmetric(insertion: AnyTransition.opacity.animation(.interactiveSpring()), removal: .identity))
+            }
         }
     }
     
-    var listHeader: some View {
-        HStack {
-            if searchText.isEmpty {
-                Menu(favourite: $showFavourites)
-            } else {
-                Text("Stocks")
-                    .font(.title2)
-                    .bold()
-            }
-            Spacer()
-        }
-        .background(Color.white)
+    // MARK: - Functions
+    
+    func onSnippetTap(_ index: Int) {
+        let ticker = self.filteredStocks[index].companyTicker
+        self.stockStore.selectedStockIndex = self.stockStore.stocks.firstIndex(where: {$0.companyTicker == ticker})
+        self.stockStore.showDetails = true
     }
 }
 

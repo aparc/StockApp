@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum StockDateRange: Int {
+enum DateInterval: Int {
     case day, week, month, threeMonths, halfYear, year
 }

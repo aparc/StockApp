@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabItem: View {
+struct TabLabel: View {
     
     // MARK: - Variables
     
@@ -26,8 +26,8 @@ struct TabItem: View {
 
 // MARK: - Preview
 
-struct TabItem_Previews: PreviewProvider {
+struct TabLabel_Previews: PreviewProvider {
     static var previews: some View {
-        TabItem(title: "Chart", active: false)
+        TabLabel(title: "Chart", active: false)
     }
 }

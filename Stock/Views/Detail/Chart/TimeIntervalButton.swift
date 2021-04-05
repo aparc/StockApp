@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RangeButton: View {
+struct TimeIntervalButton: View {
     
     var title: String
     var active: Bool
@@ -23,8 +23,8 @@ struct RangeButton: View {
     }
 }
 
-struct RangeButton_Previews: PreviewProvider {
+struct TimeIntervalButton_Previews: PreviewProvider {
     static var previews: some View {
-        RangeButton(title: "D", active: true)
+        TimeIntervalButton(title: "D", active: true)
     }
 }

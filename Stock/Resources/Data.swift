@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 
 let token = "c176pnf48v6se55vnmcg"
 

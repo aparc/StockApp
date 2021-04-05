@@ -11,7 +11,7 @@ struct NavigationBarDetailedView: View {
     
     // MARK: - Variables
     
-    @EnvironmentObject var stockObserver: StockObserver
+    @EnvironmentObject var stockObserver: StockStore
     var ticker: String
     var companyName: String
     var isFavourite: Bool {
@@ -56,8 +56,7 @@ struct NavigationBarDetailedView: View {
     }
     
     func onBackClick() {
-        self.stockObserver.selectedStockIndex = nil
-        self.stockObserver.prices = [StockTimePrice]()
+        self.stockObserver.showDetails = false
     }
     
 }

@@ -12,7 +12,8 @@ struct StockApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environmentObject(StockObserver())
+                .environmentObject(StockStore())
+                .environmentObject(AppStore())
         }
     }
 }

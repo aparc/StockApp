@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-struct Menu: View {
+struct FavouriteStocksToggle: View {
+    
+    // MARK: - Variables
     
     @Binding var favourite: Bool
+    
+    // MARK: - Body
     
     var body: some View {
         HStack(alignment: .firstTextBaseline) {
@@ -61,8 +65,10 @@ extension View {
     }
 }
 
-struct Menu_Previews: PreviewProvider {
+// MARK: - Preview
+
+struct FavouriteStocksToggle_Previews: PreviewProvider {
     static var previews: some View {
-        Menu(favourite: .constant(true))
+        FavouriteStocksToggle(favourite: .constant(true))
     }
 }

@@ -1,5 +1,5 @@
 //
-//  WSManager.swift
+//  WebSocketManager.swift
 //  Stock
 //
 //  Created by Андрей Парчуков on 29.03.2021.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-class WSManager {
+class WebSocketManager {
     
-    static var manager = WSManager()
+    static var instance = WebSocketManager()
     private var websocketTask: URLSessionWebSocketTask?
     
     private init() {}
@@ -18,7 +18,6 @@ class WSManager {
         let session = URLSession(configuration: .default)
         let url = URL(string:  "wss://ws.finnhub.io?token=\(token)")!
         websocketTask = session.webSocketTask(with: url)
-        
         websocketTask?.resume()
     }
     
@@ -40,7 +39,7 @@ class WSManager {
     func receieveMessage(callback: @escaping(String) -> Void) {
         websocketTask?.receive { (response) in
             switch response {
-            case .success(let message) :
+            case .success(let message):
                 switch message {
                 case .string(let text):
                     callback(text)
@@ -53,7 +52,7 @@ class WSManager {
                     break
                 }
             case .failure(_):
-                print("Error")
+                print("An error occurred while receiving data via websocket connection")
             }
         }
     }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabsMenu: View {
+struct DetailsToggles: View {
     
     // MARK: - Variables
     
@@ -21,7 +21,7 @@ struct TabsMenu: View {
             ScrollViewReader { reader in
                 HStack(spacing: 20) {
                     ForEach(items.indices, id: \.self) { index in
-                        TabItem(title: items[index], active: selectedIndex == index)
+                        TabLabel(title: items[index], active: selectedIndex == index)
                             .id(index)
                             .onTapGesture {
                                 withAnimation {
@@ -36,8 +36,8 @@ struct TabsMenu: View {
     }
 }
 
-struct DetailsMenu_Previews: PreviewProvider {
+struct DetailsToggles_Previews: PreviewProvider {
     static var previews: some View {
-        TabsMenu()
+        DetailsToggles()
     }
 }

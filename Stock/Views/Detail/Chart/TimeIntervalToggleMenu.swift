@@ -7,20 +7,22 @@
 
 import SwiftUI
 
-struct RangeItems: View {
+struct TimeIntervalToggleMenu: View {
     
     // MARK: - Variables
-    @Binding var range: StockDateRange
+    
+    @Binding var range: DateInterval
     var items: [String] = ["D", "W", "M", "3M", "6M", "Y"]
     
     // MARK: - Body
+    
     var body: some View {
         HStack {
             ForEach(items.indices) { index in
-                RangeButton(title: items[index], active: range.rawValue == index)
+                TimeIntervalButton(title: items[index], active: range.rawValue == index)
                     .onTapGesture {
                         withAnimation {
-                            range = StockDateRange(rawValue: index) ?? .week
+                            range = DateInterval(rawValue: index) ?? .week
                         }
                     }
             }
@@ -28,8 +30,8 @@ struct RangeItems: View {
     }
 }
 
-struct RangeItems_Previews: PreviewProvider {
+struct TimeIntervalToggleMenu_Previews: PreviewProvider {
     static var previews: some View {
-        RangeItems(range: .constant(StockDateRange.week))
+        TimeIntervalToggleMenu(range: .constant(DateInterval.week))
     }
 }

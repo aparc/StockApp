@@ -11,7 +11,7 @@ struct Line: View {
     
     // MARK: - Variables
     
-    @ObservedObject var data: ChartData
+    var data: ChartData
     @Binding var frame: CGRect
     @State var touchLocation: CGPoint = .zero
     @State var showIndicator: Bool = false

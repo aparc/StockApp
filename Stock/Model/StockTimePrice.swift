@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Сontains a couple of values time and price for further display on the chart
 struct StockTimePrice  {
     
     var time: Int64

@@ -8,11 +8,13 @@
 import Foundation
 import Alamofire
 
-class StockObserver: ObservableObject{
+class StockStore: ObservableObject{
     
     @Published var stocks = [Stock]()
     @Published var selectedStockIndex: Int? = nil
-    @Published var prices = [StockTimePrice]()
+    @Published var showDetails = false
+    
+    var stockCache = Cache<StockCacheKey, [StockTimePrice]>()
     private var dispatchGroup = DispatchGroup()
     
     init() {
@@ -20,8 +22,7 @@ class StockObserver: ObservableObject{
         dispatchGroup.notify(queue: DispatchQueue.main) { self.subscribe() }
     }
     
-    private func fetchData() -> Void {
-        let decoder = JSONDecoder()
+    private func fetchData() {
         var parameters = ["symbol": "", "token": token]
         
         for (tiсker, companyName) in tickers {
@@ -31,39 +32,37 @@ class StockObserver: ObservableObject{
                 switch response.result {
                 
                 case let .success(result):
-                    if let data = try? decoder.decode(StockQuote.self, from: result!) {
+                    if let data = try? JSONDecoder().decode(StockQuote.self, from: result!) {
                         self.stocks.append(data.convertToStock(tiсker, companyName))
                     }
                     self.dispatchGroup.leave()
-
+                    
                 case let .failure(error):
                     fatalError("An error occured while fetching data from API: \(error)")
                 }   
             }
         }
     }
-   
+    
     private func subscribe() {
-        let websocket = WSManager.manager
+        let websocket = WebSocketManager.instance
         websocket.connect()
         for (ticker, _) in tickers {
             websocket.send(message: "{\"type\":\"subscribe\",\"symbol\":\"\(ticker)\"}")
         }
         
-        let decoder = JSONDecoder()
         websocket.onEvent { text in
-            if let data = try? decoder.decode(Trades.self, from: text.data(using: .utf8)!) {
-                let trades = data.data
+            if let decoded = try? JSONDecoder().decode(Trades.self, from: text.data(using: .utf8)!) {
+                let trades = decoded.data
                 
-                let a =  Dictionary(grouping: trades, by: {$0.s})
-                for (ticker, value) in a {
+                let groupedByTicker =  Dictionary(grouping: trades, by: {$0.s})
+                for (ticker, value) in groupedByTicker {
                     let lastTrade =  value.max { a, b in a.t < a.t }
-                    
-                    let index = self.stocks.firstIndex(where: { $0.companyTicker == ticker})
+                    let index = self.stocks.firstIndex(where: { $0.companyTicker == ticker})!
                     
                     DispatchQueue.main.async {
-                        self.stocks[index!].currentPrice = lastTrade?.p ?? 0.0
-                        self.stocks[index!].calculateChanges()
+                        self.stocks[index].currentPrice = lastTrade?.p ?? 0.0
+                        self.stocks[index].calculateChanges()
                     }
                 }
             }
