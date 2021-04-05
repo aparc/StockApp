@@ -21,7 +21,7 @@ struct QuickSearch: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(labels.count > 0 ? "You've search for this" : "Please use the search to find a company or ticker")
+            Text(labels.count > 0 ? "You've searched for this" : "Please use the search to find a company or ticker")
                 .font(.title3)
                 .bold()
             WrappingHStack(data: labels, id: \.self) { label in
