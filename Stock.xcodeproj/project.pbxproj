@@ -44,6 +44,8 @@
 		12EF8CC125FEA68F00201CED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12EF8CC025FEA68F00201CED /* Assets.xcassets */; };
 		12EF8CC425FEA68F00201CED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12EF8CC325FEA68F00201CED /* Preview Assets.xcassets */; };
 		12EF8CCD25FEA6A700201CED /* StockSnippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF8CCC25FEA6A700201CED /* StockSnippet.swift */; };
+		499112E828FCA40100A14498 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 499112E728FCA40100A14498 /* README.md */; };
+		499112EA28FCA4A700A14498 /* stock_preview.gif in Resources */ = {isa = PBXBuildFile; fileRef = 499112E928FCA4A700A14498 /* stock_preview.gif */; };
 		E29243A75FD56ABC7ADFE16B /* Pods_Stock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB0D99A0647627A3BFB2742E /* Pods_Stock.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +88,8 @@
 		12EF8CC325FEA68F00201CED /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		12EF8CC525FEA68F00201CED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12EF8CCC25FEA6A700201CED /* StockSnippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockSnippet.swift; sourceTree = "<group>"; };
+		499112E728FCA40100A14498 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		499112E928FCA4A700A14498 /* stock_preview.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = stock_preview.gif; sourceTree = "<group>"; };
 		56ED8355BA5B1FA07417CB8C /* Pods-Stock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock.debug.xcconfig"; path = "Target Support Files/Pods-Stock/Pods-Stock.debug.xcconfig"; sourceTree = "<group>"; };
 		816186237D61DCBB98779A3E /* Pods-Stock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock.release.xcconfig"; path = "Target Support Files/Pods-Stock/Pods-Stock.release.xcconfig"; sourceTree = "<group>"; };
 		FB0D99A0647627A3BFB2742E /* Pods_Stock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,6 +235,7 @@
 		12EF8CB025FEA68C00201CED = {
 			isa = PBXGroup;
 			children = (
+				499112E728FCA40100A14498 /* README.md */,
 				12EF8CBB25FEA68C00201CED /* Stock */,
 				12EF8CBA25FEA68C00201CED /* Products */,
 				DA4EEA042B990A5A72479284 /* Pods */,
@@ -256,6 +261,7 @@
 				12DE88D9260A501300941923 /* Stores */,
 				12EF8CBC25FEA68C00201CED /* StockApp.swift */,
 				12EF8CC025FEA68F00201CED /* Assets.xcassets */,
+				499112E928FCA4A700A14498 /* stock_preview.gif */,
 				12EF8CC525FEA68F00201CED /* Info.plist */,
 				12EF8CC225FEA68F00201CED /* Preview Content */,
 			);
@@ -352,7 +358,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				499112E828FCA40100A14498 /* README.md in Resources */,
 				12EF8CC425FEA68F00201CED /* Preview Assets.xcassets in Resources */,
+				499112EA28FCA4A700A14498 /* stock_preview.gif in Resources */,
 				12EF8CC125FEA68F00201CED /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
