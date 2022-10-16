@@ -1,4 +1,4 @@
 #  Stock Application
 
-![](Stock/stock_preview.gif)
+![](Stock/preview.gif)
 
